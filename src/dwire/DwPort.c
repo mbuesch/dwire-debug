@@ -172,9 +172,12 @@ void DwWriteAddr(int addr, int len, const u8 *buf) {
 
 
 void DwReconnect(void) {
-  DwSend(Bytes(0xF0));  // Request current PC
-  PC = (2 * (DwReadWord() - 1) % FlashSize());
-  DwGetRegs(28, R+28, 4); // Cache r28 through r31
+  int size = FlashSize();
+  if (size > 0) {
+    DwSend(Bytes(0xF0));  // Request current PC
+    PC = (2 * (DwReadWord() - 1) % size);
+    DwGetRegs(28, R+28, 4); // Cache r28 through r31
+  }
 }
 
 void DwReset(void) {
