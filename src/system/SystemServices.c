@@ -34,7 +34,8 @@
 #ifndef __linux__
   #include <stropts.h>
 #endif
-#include <asm/termios.h>
+#include <asm/termbits.h>
+#include <sys/ioctl.h>
 #endif
   #include <setjmp.h>
   #include <dlfcn.h>
